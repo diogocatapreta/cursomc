@@ -21,7 +21,7 @@ public class CategoriaResource {
 	private CategoriaService service;
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Categoria> listar() {
+	public ResponseEntity<?> listar() {
 		
 		Categoria cat1 = new Categoria(1,"Informática");
 		Categoria cat2 = new Categoria (2,"Escritório");
@@ -30,7 +30,7 @@ public class CategoriaResource {
 		listaCategoria.add(cat1);
 		listaCategoria.add(cat2);
 		
-		return listaCategoria;
+		return ResponseEntity.ok(listaCategoria);
 	}
 	
 	
