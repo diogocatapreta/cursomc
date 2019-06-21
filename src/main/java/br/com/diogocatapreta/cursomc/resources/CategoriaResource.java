@@ -1,15 +1,28 @@
 package br.com.diogocatapreta.cursomc.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.diogocatapreta.cursomc.domain.Categoria;
 
 @RestController
 @RequestMapping(value="/api/v1/categorias")
 public class CategoriaResource {
 
 	@RequestMapping(method=RequestMethod.GET)
-	public String listar() {
-		return "String de retorno para teste";
+	public List<Categoria> listar() {
+		
+		Categoria cat1 = new Categoria(1,"Informática");
+		Categoria cat2 = new Categoria (2,"Escritório");
+		
+		List<Categoria> listaCategoria = new ArrayList<>();
+		listaCategoria.add(cat1);
+		listaCategoria.add(cat2);
+		
+		return listaCategoria;
 	}
 }
