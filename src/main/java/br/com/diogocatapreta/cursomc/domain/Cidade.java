@@ -1,40 +1,36 @@
 package br.com.diogocatapreta.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Categoria implements Serializable{
+public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String Nome;
+	private String name;
+
+	@ManyToOne 
+	@JoinColumn(name="estado_id")
+	private Estado estado;
 	
-	@JsonManagedReference
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();
-	
-	public Categoria () {
+	public Cidade() {
 		
 	}
 	
-	public Categoria(Integer id, String nome) {
+	public Cidade(Integer id, String name, Estado estado) {
 		super();
 		this.id = id;
-		Nome = nome;
+		this.name = name;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -45,22 +41,21 @@ public class Categoria implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return Nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		Nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -78,7 +73,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -86,9 +81,10 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-
-
 	
 	
+	
+	
+
 	
 }
